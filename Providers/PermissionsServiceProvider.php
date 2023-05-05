@@ -27,6 +27,9 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(!$this->app->providerIsLoaded(UsersServiceProvider::class))
+            throw new ProviderNotLoadedException('Users');
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -46,9 +49,6 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if(!$this->app->providerIsLoaded(UsersServiceProvider::class))
-            throw new ProviderNotLoadedException('Users');
-
         $this->app->register(RouteServiceProvider::class);
     }
 
@@ -60,7 +60,7 @@ class PermissionsServiceProvider extends ServiceProvider
     protected function registerAssets()
     {
         $this->publishes([
-            module_path($this->moduleName, 'dist/build-permissions') => public_path(),
+            module_path($this->moduleName, 'dist/build-permissions') => public_path('build-permissions'),
         ], 'modules-assets');
     }
 
