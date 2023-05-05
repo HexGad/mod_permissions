@@ -30,6 +30,7 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        $this->registerAssets();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
 
         Gate::before(function ($user, string $ability) {
@@ -50,6 +51,19 @@ class PermissionsServiceProvider extends ServiceProvider
 
         $this->app->register(RouteServiceProvider::class);
     }
+
+    /**
+     * Register assets files.
+     *
+     * @return void
+     */
+    protected function registerAssets()
+    {
+        $this->publishes([
+            module_path($this->moduleName, 'dist/build-permissions') => public_path(),
+        ], 'assets');
+    }
+
 
     /**
      * Register config.

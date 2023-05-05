@@ -6,7 +6,7 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     build: {
-        outDir: '../../public/build-permissions',
+        outDir: __dirname + '/dist/build-permissions',
         emptyOutDir: true,
         manifest: true,
     },
