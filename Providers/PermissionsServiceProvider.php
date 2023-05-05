@@ -61,7 +61,7 @@ class PermissionsServiceProvider extends ServiceProvider
     {
         $this->publishes([
             module_path($this->moduleName, 'dist/build-permissions') => public_path(),
-        ], 'assets');
+        ], 'modules-assets');
     }
 
 
